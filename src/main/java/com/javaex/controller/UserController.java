@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
 import com.javaex.vo.UserVo;
 
@@ -44,7 +45,11 @@ public class UserController extends HttpServlet {
 			System.out.println(userVo);
 			
 			//dao의 메소드로 회원가입
+			UserDao userDao = new UserDao();
+			userDao.insertUser(userVo);
 			
+			//joinOk.jsp 포워드
+			WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
 			
 		}else {
 			System.out.println("action값을 다시확인해주세요");

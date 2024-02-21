@@ -73,7 +73,7 @@ public class UserDao {
 			pstmt.setString(1, userVo.getId());
 			pstmt.setString(2, userVo.getPw());
 			pstmt.setString(3, userVo.getName());
-			pstmt.setString(3, userVo.getGender());
+			pstmt.setString(4, userVo.getGender());
 
 			// 실행
 			count = pstmt.executeUpdate();
