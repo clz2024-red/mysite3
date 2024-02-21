@@ -55,15 +55,39 @@ public class UserDao {
 		}
 	}
 
+	//회원가입
 	public int insertUser(UserVo userVo) {
-		
+		int count = -1;
+
 		this.getConnection();
 		
-		//insert코드
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// SQL문 준비
+			String query = "";
+			query += " insert into users  ";
+			query += " values(null, ?, ?, ?, ?) ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userVo.getId());
+			pstmt.setString(2, userVo.getPw());
+			pstmt.setString(3, userVo.getName());
+			pstmt.setString(3, userVo.getGender());
+
+			// 실행
+			count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println(count + "건 등록되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} 
 		
 		this.close();
-		
-		return 1;
+
+		return count;
 	}
 
 }
