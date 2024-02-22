@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
@@ -51,14 +52,49 @@ public class UserController extends HttpServlet {
 			//joinOk.jsp 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
 			
+		}else if("loginform".equals(action)) {
+			System.out.println("user>loginForm");
+			
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/loginForm.jsp");
+			
+			
+		}else if("login".equals(action)) {
+			System.out.println("user>login");
+			
+			String id = request.getParameter("id");
+			String password = request.getParameter("pw");
+			
+			UserVo userVo = new UserVo(id, password);
+			
+			UserDao userDao = new UserDao();
+			UserVo authUser = userDao.selectUserByIdPw(userVo); //id pw
+			// no name
+			
+			if(authUser != null) { //로그인성공
+				HttpSession session = request.getSession();
+				session.setAttribute("authUser", authUser);
+			
+				WebUtil.redirect(request, response, "/mysite3/main");
+				
+			}else { //로그인실패
+
+				WebUtil.redirect(request, response, "/mysite3/user?action=loginform");
+			}
+			
+			
+		}else if("logout".equals(action)) {
+			System.out.println("user>logout");
+			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			WebUtil.redirect(request, response, "/mysite3/main");
+			
+			
 		}else {
 			System.out.println("action값을 다시확인해주세요");
 		}
-		
-		
-		
-		
-		//회원가입
 		
 		
 	}

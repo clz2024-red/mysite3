@@ -9,7 +9,6 @@
 <link href="/mysite3/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
-
 <body>
 	<div id="wrap">
 
@@ -31,41 +30,56 @@
 			<div id="content">
 			
 				<div id="content-head">
-					<h3>회원가입</h3>
+					<h3>로그인</h3>
 					<div id="location">
 						<ul>
 							<li>홈</li>
 							<li>회원</li>
-							<li class="last">회원가입</li>
+							<li class="last">로그인</li>
 						</ul>
 					</div>
 					<div class="clear"></div>
 				</div>
-				<!-- //content-head -->
+				 <!-- //content-head -->
 	
 				<div id="user">
-					<div id="joinOK">
-					
-						<p class="text-large bold">
-							회원가입을 축하합니다.<br>
-							<br>
-							<a href="" >[로그인하기]</a>
-						</p>
+					<div id="loginForm">
+						<form action="/mysite3/user" method="get">
+	
+							<!-- 아이디 -->
+							<div class="form-group">
+								<label class="form-text" for="input-uid">아이디</label> 
+								<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
+							</div>
+	
+							<!-- 비밀번호 -->
+							<div class="form-group">
+								<label class="form-text" for="input-pass">비밀번호</label> 
+								<input type="text" id="input-pass" name="pw" value="" placeholder="비밀번호를 입력하세요"	>
+							</div>
+	
 							
+							<!-- 버튼영역 -->
+							<div class="button-area">
+								<button type="submit" id="btn-submit">로그인</button>
+							</div>
+							<input type="text" name="action" value="login">
+						</form>
 					</div>
-					<!-- //joinOK -->
+					<!-- //loginForm -->
 				</div>
 				<!-- //user -->
 			</div>
 			<!-- //content  -->
+			
 		</div>
 		<!-- //container  -->
-
 
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
-
+		
+		
 	</div>
 	<!-- //wrap -->
 
